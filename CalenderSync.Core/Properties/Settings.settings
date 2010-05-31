@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CalendarSync.Core.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="GoogleUserName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">UserName</Value>
+    </Setting>
+    <Setting Name="GooglePassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Password</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
