@@ -40,5 +40,32 @@ namespace CalendarSync.Core.Properties {
                 return ((string)(this["GooglePassword"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int MonthsInTheFuture {
+            get {
+                return ((int)(this["MonthsInTheFuture"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int MonthsInThePast {
+            get {
+                return ((int)(this["MonthsInThePast"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int SyncIntervalMinutes {
+            get {
+                return ((int)(this["SyncIntervalMinutes"]));
+            }
+        }
     }
 }

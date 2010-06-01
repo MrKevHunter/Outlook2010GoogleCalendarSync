@@ -3,7 +3,7 @@ using CalendarSync.Core.Contracts;
 
 namespace CalendarSync.Core.Services
 {
-	public class CalendarSyncService 
+	public class CalendarSyncService : ICalendarSyncService
 	{
 		private const int MONTHS_PAST = 2;
 		private const int MONTHS_FUTURE = 3;

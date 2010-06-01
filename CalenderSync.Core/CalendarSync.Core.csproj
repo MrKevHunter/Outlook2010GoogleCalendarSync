@@ -49,6 +49,9 @@
     <Reference Include="Microsoft.Office.Interop.Outlook, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\Binaries\Structuremap\StructureMap2.6.1\deploy\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -59,8 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\ICalendarService.cs" />
+    <Compile Include="Contracts\ICalendarSyncService.cs" />
     <Compile Include="Domain\GoogleCalenderItem.cs" />
     <Compile Include="Domain\OutlookCalenderItem.cs" />
+    <Compile Include="IocConfig\StructureMapConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\CalenderItem.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -79,6 +84,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

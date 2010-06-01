@@ -1,6 +1,7 @@
 ﻿using System;
-using CalendarSync.Core.Services;
-using Office = Microsoft.Office.Core;
+using System.Diagnostics;
+using CalendarSync.Core.Contracts;
+using CalendarSync.Core.IocConfig;
 
 namespace GoogleCalendarSyncOutlookAddIn
 {
@@ -8,10 +9,9 @@ namespace GoogleCalendarSyncOutlookAddIn
 	{
 		private void ThisAddIn_Startup(object sender, EventArgs e)
 		{
-			Console.WriteLine("Syncing Items");
-			var syncService = new CalendarSyncService(new GoogleCalendarService(),
-			                                          new OutlookCalendarService());
-			syncService.Sync();
+			Trace.WriteLine("Syncing Items");
+			var syncService = StructureMapConfig.Container.GetInstance<ICalendarSyncService>();
+		//	syncService.Sync();
 		}
 
 		private void ThisAddIn_Shutdown(object sender, EventArgs e)

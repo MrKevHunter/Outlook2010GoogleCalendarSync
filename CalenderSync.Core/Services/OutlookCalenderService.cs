@@ -43,7 +43,6 @@ namespace CalendarSync.Core.Services
 		{
 			MAPIFolder defaultFolder = GetCalendarFolder();
 			var appointmentItem = GetAppointment(item);
-	//		defaultFolder.Items.Add(appointmentItem);
 			appointmentItem.Save();
 		}
 
