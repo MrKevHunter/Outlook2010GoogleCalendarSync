@@ -1,5 +1,6 @@
 using System.Linq;
 using CalendarSync.Core.Contracts;
+using CalendarSync.Core.Properties;
 
 namespace CalendarSync.Core.Services
 {
@@ -10,19 +11,20 @@ namespace CalendarSync.Core.Services
 		{
 			get
 			{
-				return 0;
+				return Settings.Default.MonthsInThePast;
 			}
 		}
 
 
-		public int MonthsFutureToSync 
-		{ 
-			get { return 0; }
+		private int MonthsFutureToSync 
+		{
+			get
+			{
+				return Settings.Default.MonthsInTheFuture;
+			}
 		}
 
 
-		private const int MONTHS_PAST = 2;
-		private const int MONTHS_FUTURE = 3;
 		private readonly ICalendarService _googleCalendarService;
 		private readonly ICalendarService _outlookCalendarService;
 
@@ -34,8 +36,8 @@ namespace CalendarSync.Core.Services
 
 		public void Sync()
 		{
-			var googleItems = _googleCalendarService.GetItems(MonthsHistoryToSync, MONTHS_FUTURE);
-			var outlookItems = _outlookCalendarService.GetItems(MonthsHistoryToSync, MONTHS_FUTURE);
+			var googleItems = _googleCalendarService.GetItems(MonthsHistoryToSync, MonthsFutureToSync);
+			var outlookItems = _outlookCalendarService.GetItems(MonthsHistoryToSync, MonthsFutureToSync);
 			var itemsMissingInOutlook = googleItems.Except(outlookItems);
 			var itemsMissingInGoogle = outlookItems.Except(googleItems);
 			_outlookCalendarService.AddItems(itemsMissingInOutlook);
