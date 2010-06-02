@@ -11,7 +11,7 @@ namespace GoogleCalendarSyncOutlookAddIn
 		{
 			Trace.WriteLine("Syncing Items");
 			var syncService = StructureMapConfig.Container.GetInstance<ICalendarSyncService>();
-		//	syncService.Sync();
+			syncService.Sync();
 		}
 
 		private void ThisAddIn_Shutdown(object sender, EventArgs e)
