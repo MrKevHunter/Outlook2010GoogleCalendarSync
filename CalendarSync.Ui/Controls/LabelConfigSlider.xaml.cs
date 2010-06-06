@@ -11,20 +11,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CalendarSync.Core.Domain;
 
-namespace CalendarSync.Ui
+namespace CalendarSync.Ui.Controls
 {
 	/// <summary>
-	/// Interaction logic for MainWindow.xaml
+	/// Interaction logic for LabelConfigSlider.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class LabelConfigSlider : UserControl
 	{
-		public MainWindow()
+		public LabelConfigSlider()
 		{
 			InitializeComponent();
 		}
-
-		public ISettings ConfigSettings { get; set; }
 	}
 }

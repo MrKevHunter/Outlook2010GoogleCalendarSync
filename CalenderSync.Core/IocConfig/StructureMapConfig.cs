@@ -39,6 +39,7 @@ namespace CalendarSync.Core.IocConfig
 						
 						x.For<ICalendarService>().Use<GoogleCalendarService>().Named("GoogleCalendarService");
 						x.For<ICalendarService>().Use<OutlookCalendarService>().Named("OutlookCalendarService");
+
 					});
 		}
 	}
