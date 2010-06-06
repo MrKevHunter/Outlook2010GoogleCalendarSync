@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Contracts\ICalendarService.cs" />
     <Compile Include="Contracts\ICalendarSyncService.cs" />
+    <Compile Include="Contracts\ISettings.cs" />
     <Compile Include="Contracts\ISyncConfiguration.cs" />
     <Compile Include="Domain\GoogleCalenderItem.cs" />
     <Compile Include="Domain\OutlookCalenderItem.cs" />

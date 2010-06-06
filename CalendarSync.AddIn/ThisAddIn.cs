@@ -31,7 +31,7 @@ namespace CalendarSync.AddIn
 			  CalendarSyncService.Sync();
         }
 
-    	private ISettings GetSettings()
+    	public static ISettings GetSettings()
     	{
     		MainWindow window = new MainWindow();
 			if(window.ShowDialog() == true)

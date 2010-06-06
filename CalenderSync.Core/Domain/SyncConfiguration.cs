@@ -27,12 +27,4 @@ namespace CalendarSync.Core.Domain
 			Settings.Default.Save();
 		}
 	}
-
-	public interface ISettings
-	{
-		string UserName { get;}
-		string PassWord { get;}
-		int MonthsInFuture { get;}
-		int MonthsInPast { get;}
-	}
 }

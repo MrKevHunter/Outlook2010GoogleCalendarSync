@@ -59,5 +59,19 @@ namespace CalendarSync.AddIn.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static System.Drawing.Bitmap _30_Sync_icon {
+            get {
+                object obj = ResourceManager.GetObject("30-Sync-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Configuration_icon_by_obsilion {
+            get {
+                object obj = ResourceManager.GetObject("Configuration_icon_by_obsilion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

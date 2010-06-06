@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CalendarSync.Core.Contracts;
 using CalendarSync.Core.Domain;
-using CalenderSync.Core.Domain;
 using Microsoft.Office.Interop.Outlook;
 
 namespace CalendarSync.Core.Services
@@ -41,7 +40,6 @@ namespace CalendarSync.Core.Services
 
 		private void AddItem(CalendarItem item)
 		{
-			MAPIFolder defaultFolder = GetCalendarFolder();
 			var appointmentItem = GetAppointment(item);
 			appointmentItem.Save();
 		}

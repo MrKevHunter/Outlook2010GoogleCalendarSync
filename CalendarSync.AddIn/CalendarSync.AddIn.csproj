@@ -187,9 +187,18 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="OutlookGoogleSyncRibbon.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="OutlookGoogleSyncRibbon.Designer.cs">
+      <DependentUpon>OutlookGoogleSyncRibbon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <EmbeddedResource Include="OutlookGoogleSyncRibbon.resx">
+      <DependentUpon>OutlookGoogleSyncRibbon.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -230,6 +239,12 @@
       <Project>{B7A7865B-5603-437C-A8FC-13687E1C84F1}</Project>
       <Name>CalendarSync.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Configuration_icon_by_obsilion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\30-Sync-icon.png" />
   </ItemGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

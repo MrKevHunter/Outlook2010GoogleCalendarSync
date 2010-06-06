@@ -1,7 +1,6 @@
-using CalendarSync.Core.Domain;
 using Microsoft.Office.Interop.Outlook;
 
-namespace CalenderSync.Core.Domain
+namespace CalendarSync.Core.Domain
 {
 	public class OutlookCalendarItem : CalendarItem
 	{
