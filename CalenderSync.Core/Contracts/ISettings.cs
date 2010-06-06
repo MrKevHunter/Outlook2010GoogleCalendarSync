@@ -2,8 +2,8 @@ namespace CalendarSync.Core.Contracts
 {
 	public interface ISettings
 	{
-		string UserName { get;}
-		string PassWord { get;}
+		string Username { get;}
+		string Password { get;}
 		int MonthsInFuture { get;}
 		int MonthsInPast { get;}
 	}

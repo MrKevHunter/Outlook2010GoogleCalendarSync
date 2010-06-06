@@ -2,8 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CalendarSync.Core.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="GoogleUserName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">UserName</Value>
+    <Setting Name="GoogleUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Username</Value>
     </Setting>
     <Setting Name="GooglePassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">Password</Value>

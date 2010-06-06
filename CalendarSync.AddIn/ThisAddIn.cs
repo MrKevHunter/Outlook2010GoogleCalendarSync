@@ -1,67 +1,66 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
 using CalendarSync.Core.Contracts;
-using CalendarSync.Core.Domain;
 using CalendarSync.Core.IocConfig;
 using CalendarSync.Ui;
-using Outlook = Microsoft.Office.Interop.Outlook;
+using Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
 
 namespace CalendarSync.AddIn
 {
-    public partial class ThisAddIn
-    {
-        private void ThisAddIn_Startup(object sender, System.EventArgs e)
-        {
-			  CalendarSyncService = StructureMapConfig.Container.GetInstance<ICalendarSyncService>();
-			  SyncConfiguration = StructureMapConfig.Container.GetInstance<ISyncConfiguration>();
+	public partial class ThisAddIn
+	{
 
-			  if (SyncConfiguration.HasDefaultSettings)
-			  {
-				  SyncConfiguration.UpdateSettings(GetSettings);
-			  }
+		// not how i would usually use Ioc but can't really do Ctor injection here
 
-			  Trace.WriteLine("Syncing Items");
+		private ICalendarSyncService CalendarSyncService
+		{
+			get { return StructureMapConfig.Container.GetInstance<ICalendarSyncService>(); }
+		}
 
-			  
-			  CalendarSyncService.Sync();
-        }
+		private ISyncConfiguration SyncConfiguration
+		{
+			get { return StructureMapConfig.Container.GetInstance<ISyncConfiguration>(); }
+		}
 
-    	public static ISettings GetSettings()
-    	{
-    		MainWindow window = new MainWindow();
-			if(window.ShowDialog() == true)
+		private void ThisAddIn_Startup(object sender, EventArgs e)
+		{
+
+			if (SyncConfiguration.HasDefaultSettings)
+			{
+				SyncConfiguration.UpdateSettings(GetSettings);
+			}
+
+			CalendarSyncService.Sync();
+		}
+
+		public static ISettings GetSettings()
+		{
+			var window = new MainWindow();
+			if (window.ShowDialog() == true)
 			{
 				return window.ConfigSettings;
 			}
-    		return null;
-    	}
-
-    	public ICalendarSyncService CalendarSyncService { get; set;}
-
-		 public ISyncConfiguration SyncConfiguration { get; set;}
+			return null;
+		}
 
 
-        private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
-        {
-        }
+		private void ThisAddIn_Shutdown(object sender, EventArgs e)
+		{
+		}
 
-        #region VSTO generated code
+		#region VSTO generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InternalStartup()
-        {
-            this.Startup += new System.EventHandler(ThisAddIn_Startup);
-            this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
-        }
-        
-        #endregion
-    }
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InternalStartup()
+		{
+			Startup += ThisAddIn_Startup;
+			Shutdown += ThisAddIn_Shutdown;
+		}
+
+		#endregion
+	}
 }

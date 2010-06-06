@@ -12,7 +12,7 @@ namespace CalendarSync.Core.Domain
 		{
 			get
 			{
-				return Settings.Default.GoogleUserName == "UserName";
+				return Settings.Default.GoogleUsername == "Username";
 			}
 			
 		}
@@ -20,8 +20,12 @@ namespace CalendarSync.Core.Domain
 		public void UpdateSettings(Func<ISettings> getSettings)
 		{
 			ISettings values = getSettings();
-			Settings.Default.GoogleUserName = values.UserName;
-			Settings.Default.GooglePassword = EncryptionService.EncryptString(EncryptionService.ToSecureString(values.PassWord));
+			if (values==null)
+			{
+				return;
+			}
+			Settings.Default.GoogleUsername = values.Username;
+			Settings.Default.GooglePassword = EncryptionService.EncryptString(EncryptionService.ToSecureString(values.Password));
 			Settings.Default.MonthsInTheFuture = values.MonthsInFuture;
 			Settings.Default.MonthsInThePast = values.MonthsInPast;
 			Settings.Default.Save();

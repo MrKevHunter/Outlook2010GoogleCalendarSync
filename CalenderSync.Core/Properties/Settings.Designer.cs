@@ -25,13 +25,13 @@ namespace CalendarSync.Core.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("UserName")]
-        public string GoogleUserName {
+        [global::System.Configuration.DefaultSettingValueAttribute("Username")]
+        public string GoogleUsername {
             get {
-                return ((string)(this["GoogleUserName"]));
+                return ((string)(this["GoogleUsername"]));
             }
             set {
-                this["GoogleUserName"] = value;
+                this["GoogleUsername"] = value;
             }
         }
         

@@ -48,7 +48,7 @@ namespace CalendarSync.Core.Services
 			return new CalendarService("CalendarSyncApp")
 			       	{
 			       		Credentials =
-			       			new GDataCredentials(Settings.Default.GoogleUserName,
+			       			new GDataCredentials(Settings.Default.GoogleUsername,
 			       			                     EncryptionService.ToInsecureString(
 			       			                     	EncryptionService.DecryptString(Settings.Default.GooglePassword)))
 			       	};

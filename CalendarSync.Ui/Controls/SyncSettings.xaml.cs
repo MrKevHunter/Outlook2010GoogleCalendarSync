@@ -29,7 +29,7 @@ namespace CalendarSync.Ui.Controls
 
 		public ISettings GetSettings()
 		{
-			return new ConfigSettings(txtUserName.Text, pwdPassword.Password, sldFuture.SliderValue, sldHistory.SliderValue);
+			return new ConfigSettings(txtUsername.Text, pwdPassword.Password, sldFuture.SliderValue, sldHistory.SliderValue);
 			
 		}
 
@@ -37,14 +37,14 @@ namespace CalendarSync.Ui.Controls
 		{
 			public ConfigSettings(string userName, string passWord, int monthsInFuture, int monthsInPast)
 			{
-				UserName = userName;
-				PassWord = passWord;
+				Username = userName;
+				Password = passWord;
 				MonthsInFuture = monthsInFuture;
 				MonthsInPast = monthsInPast;
 			}
 
-			public string UserName { get; private set; }
-			public string PassWord { get; private set; }
+			public string Username { get; private set; }
+			public string Password { get; private set; }
 			public int MonthsInFuture { get; private set; }
 			public int MonthsInPast { get; private set; }
 		}

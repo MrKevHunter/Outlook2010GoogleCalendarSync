@@ -13,17 +13,18 @@ namespace CalendarSync.Core.Services
 
 		public IEnumerable<CalendarItem> GetItems(int monthsPast, int monthsFuture)
 		{
-			MAPIFolder defaultFolder = GetCalendarFolder();
-			return
-				defaultFolder.Items.Cast<AppointmentItem>().Where(
-					appItem =>
-					appItem.Start > DateTime.Now.AddMonths(monthsPast*-1) || appItem.End < DateTime.Now.AddMonths(monthsFuture)).Select
-					(appItem => new OutlookCalendarItem(appItem));
+			Func<AppointmentItem, bool> predicate = appItem =>
+			                                        appItem.Start > DateTime.Now.AddMonths(monthsPast*-1) ||
+			                                        appItem.End < DateTime.Now.AddMonths(monthsFuture);
+
+			Func<AppointmentItem, OutlookCalendarItem> selector = appItem => new OutlookCalendarItem(appItem);
+
+			return GetCalendarFolder().Items.Cast<AppointmentItem>().Where(predicate).Select(selector);
 		}
 
 		public void AddItems(IEnumerable<CalendarItem> itemsToAdd)
 		{
-			foreach (CalendarItem item in itemsToAdd)
+			foreach (var item in itemsToAdd)
 			{
 				AddItem(item);
 			}
@@ -40,7 +41,7 @@ namespace CalendarSync.Core.Services
 
 		private void AddItem(CalendarItem item)
 		{
-			var appointmentItem = GetAppointment(item);
+			AppointmentItem appointmentItem = GetAppointment(item);
 			appointmentItem.Save();
 		}
 
@@ -57,10 +58,7 @@ namespace CalendarSync.Core.Services
 
 		private OlSensitivity GetSensitivity(CalendarItem item)
 		{
-			if (item.IsPrivateItem)
-				return OlSensitivity.olPrivate;
-
-			return OlSensitivity.olNormal;
+			return item.IsPrivateItem ? OlSensitivity.olPrivate : OlSensitivity.olNormal;
 		}
 	}
 }
