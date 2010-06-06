@@ -38,10 +38,7 @@ namespace CalendarSync.AddIn
 			{
 				return window.ConfigSettings;
 			}
-			else
-			{
-				throw new Exception("Argh");
-			}
+    		return null;
     	}
 
     	public ICalendarSyncService CalendarSyncService { get; set;}

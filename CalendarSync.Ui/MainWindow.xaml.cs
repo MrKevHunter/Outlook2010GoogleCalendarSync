@@ -26,5 +26,20 @@ namespace CalendarSync.Ui
 		}
 
 		public ISettings ConfigSettings { get; set; }
+
+		private void btnSaveClick(object sender, RoutedEventArgs e)
+		{
+			this.ConfigSettings =  this.syncSettings.GetSettings();
+			this.DialogResult = true;
+			this.Close();
+		}
+
+		private void btnCancel_Click(object sender, RoutedEventArgs e)
+		{
+			this.DialogResult = false;
+			this.Close();
+		}
+
+	
 	}
 }

@@ -2,19 +2,19 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CalendarSync.Core.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="GoogleUserName" Type="System.String" Scope="Application">
+    <Setting Name="GoogleUserName" Type="System.String" Scope="User">
       <Value Profile="(Default)">UserName</Value>
     </Setting>
-    <Setting Name="GooglePassword" Type="System.String" Scope="Application">
+    <Setting Name="GooglePassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">Password</Value>
     </Setting>
-    <Setting Name="MonthsInTheFuture" Type="System.Int32" Scope="Application">
+    <Setting Name="MonthsInTheFuture" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
-    <Setting Name="MonthsInThePast" Type="System.Int32" Scope="Application">
+    <Setting Name="MonthsInThePast" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="SyncIntervalMinutes" Type="System.Int32" Scope="Application">
+    <Setting Name="SyncIntervalMinutes" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">30</Value>
     </Setting>
   </Settings>

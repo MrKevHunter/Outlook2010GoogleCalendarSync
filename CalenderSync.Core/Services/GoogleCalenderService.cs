@@ -46,7 +46,12 @@ namespace CalendarSync.Core.Services
 		private CalendarService GetService()
 		{
 			return new CalendarService("CalendarSyncApp")
-			       	{Credentials = new GDataCredentials(Settings.Default.GoogleUserName, Settings.Default.GooglePassword)};
+			       	{
+			       		Credentials =
+			       			new GDataCredentials(Settings.Default.GoogleUserName,
+			       			                     EncryptionService.ToInsecureString(
+			       			                     	EncryptionService.DecryptString(Settings.Default.GooglePassword)));
+		}
 		}
 
 		private void AddItem(CalendarItem calendarItem)

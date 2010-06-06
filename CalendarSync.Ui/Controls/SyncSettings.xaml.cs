@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CalendarSync.Core.Domain;
 
 namespace CalendarSync.Ui.Controls
 {
@@ -22,6 +23,29 @@ namespace CalendarSync.Ui.Controls
 		public SyncSettings()
 		{
 			InitializeComponent();
+		}
+
+
+		public ISettings GetSettings()
+		{
+			return new ConfigSettings(txtUserName.Text, pwdPassword.Password, sldFuture.SliderValue, sldHistory.SliderValue);
+			
+		}
+
+		private class ConfigSettings : ISettings
+		{
+			public ConfigSettings(string userName, string passWord, int monthsInFuture, int monthsInPast)
+			{
+				UserName = userName;
+				PassWord = passWord;
+				MonthsInFuture = monthsInFuture;
+				MonthsInPast = monthsInPast;
+			}
+
+			public string UserName { get; private set; }
+			public string PassWord { get; private set; }
+			public int MonthsInFuture { get; private set; }
+			public int MonthsInPast { get; private set; }
 		}
 	}
 }
