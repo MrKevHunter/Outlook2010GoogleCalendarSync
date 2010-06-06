@@ -50,8 +50,8 @@ namespace CalendarSync.Core.Services
 			       		Credentials =
 			       			new GDataCredentials(Settings.Default.GoogleUserName,
 			       			                     EncryptionService.ToInsecureString(
-			       			                     	EncryptionService.DecryptString(Settings.Default.GooglePassword)));
-		}
+			       			                     	EncryptionService.DecryptString(Settings.Default.GooglePassword)))
+			       	};
 		}
 
 		private void AddItem(CalendarItem calendarItem)
