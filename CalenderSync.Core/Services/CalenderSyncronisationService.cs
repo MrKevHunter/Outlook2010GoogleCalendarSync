@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CalendarSync.Core.Contracts;
 using CalendarSync.Core.Domain;
-using CalendarSync.Core.Properties;
 
 namespace CalendarSync.Core.Services
 {
@@ -15,17 +14,6 @@ namespace CalendarSync.Core.Services
 		{
 			_googleCalendarService = googleCalendarService;
 			_outlookCalendarService = outlookCalendarService;
-		}
-
-		private int MonthsHistoryToSync
-		{
-			get { return Settings.Default.MonthsInThePast; }
-		}
-
-
-		private int MonthsFutureToSync
-		{
-			get { return Settings.Default.MonthsInTheFuture; }
 		}
 
 		#region ICalendarSyncService Members
