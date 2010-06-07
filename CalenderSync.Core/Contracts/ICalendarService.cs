@@ -5,7 +5,7 @@ namespace CalendarSync.Core.Contracts
 {
 	public interface ICalendarService
 	{
-		IEnumerable<CalendarItem> GetItems(int monthsPast, int monthsFuture);
+		IEnumerable<CalendarItem> GetItems();
 		void AddItems(IEnumerable<CalendarItem> itemsToAdd);
 	}
 }

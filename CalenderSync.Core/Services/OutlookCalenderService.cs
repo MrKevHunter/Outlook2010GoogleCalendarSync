@@ -11,11 +11,20 @@ namespace CalendarSync.Core.Services
 	{
 		#region ICalendarService Members
 
-		public IEnumerable<CalendarItem> GetItems(int monthsPast, int monthsFuture)
+		private readonly int _monthsPast;
+		private readonly int _monthsFuture;
+
+		public OutlookCalendarService(int monthsPast, int monthsFuture)
+		{
+			_monthsPast = monthsPast;
+			_monthsFuture = monthsFuture;
+		}
+
+		public IEnumerable<CalendarItem> GetItems()
 		{
 			Func<AppointmentItem, bool> predicate = appItem =>
-			                                        appItem.Start > DateTime.Now.AddMonths(monthsPast*-1) ||
-			                                        appItem.End < DateTime.Now.AddMonths(monthsFuture);
+																 appItem.Start > DateTime.Now.AddMonths(_monthsPast * -1) ||
+																 appItem.End < DateTime.Now.AddMonths(_monthsFuture);
 
 			Func<AppointmentItem, OutlookCalendarItem> selector = appItem => new OutlookCalendarItem(appItem);
 

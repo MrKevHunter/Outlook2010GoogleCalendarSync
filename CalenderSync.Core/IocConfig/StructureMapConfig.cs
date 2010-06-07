@@ -1,4 +1,5 @@
 using CalendarSync.Core.Contracts;
+using CalendarSync.Core.Properties;
 using CalendarSync.Core.Services;
 using StructureMap;
 
@@ -34,14 +35,15 @@ namespace CalendarSync.Core.IocConfig
 						x.For<ICalendarSyncService>().Use<CalendarSyncService>().Ctor<ICalendarService>("googleCalendarService").Is(
 							y => y.GetInstance<ICalendarService>("GoogleCalendarService")).Ctor<ICalendarService>("outlookCalendarService").
 							Is(z => z.GetInstance<ICalendarService>("OutlookCalendarService"));
-					
-				
-						
-						x.For<ICalendarService>().Use<GoogleCalendarService>().Named("GoogleCalendarService");
-						x.For<ICalendarService>().Use<OutlookCalendarService>().Named("OutlookCalendarService");
 
+
+						x.For<ICalendarService>().Use<GoogleCalendarService>().Named("GoogleCalendarService").Ctor<int>("monthsPast").Is(
+							Settings.Default.MonthsInThePast).Ctor<int>("monthsFuture").Is(Settings.Default.MonthsInTheFuture);
+
+						x.For<ICalendarService>().Use<OutlookCalendarService>().Named("OutlookCalendarService").Ctor<int>("monthsPast").Is
+							(
+								Settings.Default.MonthsInThePast).Ctor<int>("monthsFuture").Is(Settings.Default.MonthsInTheFuture);
 					});
 		}
 	}
-	
 }

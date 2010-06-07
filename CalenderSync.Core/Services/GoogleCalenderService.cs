@@ -12,19 +12,27 @@ namespace CalendarSync.Core.Services
 {
 	public class GoogleCalendarService : ICalendarService
 	{
+		private readonly int _monthsPast;
+		private readonly int _monthsFuture;
 		private const string GOOGLE_CALENDAR_URI = "http://www.google.com/calendar/feeds/default/private/full";
+
+		public GoogleCalendarService(int monthsPast,int monthsFuture)
+		{
+			_monthsPast = monthsPast;
+			_monthsFuture = monthsFuture;
+		}
 
 		#region ICalendarService Members
 
-		public IEnumerable<CalendarItem> GetItems(int monthsPast, int monthsFuture)
+		public IEnumerable<CalendarItem> GetItems()
 		{
 			CalendarService service = GetService();
 
 			var query = new EventQuery
 			            	{
 			            		Uri = new Uri(GOOGLE_CALENDAR_URI),
-			            		StartTime = DateTime.Now.AddMonths(monthsPast*-1),
-			            		EndTime = DateTime.Now.AddMonths(monthsFuture)
+									StartTime = DateTime.Now.AddMonths(_monthsPast * -1),
+									EndTime = DateTime.Now.AddMonths(_monthsFuture)
 			            	};
 
 

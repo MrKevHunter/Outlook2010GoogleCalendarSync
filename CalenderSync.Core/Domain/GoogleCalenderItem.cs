@@ -13,7 +13,7 @@ namespace CalendarSync.Core.Domain
 			Start = _entry.Times[0].StartTime;
 			End = _entry.Times[0].EndTime;
 			Title = _entry.Title.Text;
-			IsPrivateItem = _entry.EventVisibility != EventEntry.Visibility.PUBLIC;
+			IsPrivateItem = _entry.EventVisibility != EventEntry.Visibility.PUBLIC && _entry.EventVisibility !=EventEntry.Visibility.DEFAULT;
 			Location = _entry.Locations[0].ValueString;
 
 		}

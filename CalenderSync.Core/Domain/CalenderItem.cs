@@ -5,7 +5,7 @@ namespace CalendarSync.Core.Domain
 	public abstract class CalendarItem : IEquatable<CalendarItem>
 	{
 		public string Title { get; protected set; }
-		
+
 		public DateTime Start { get; protected set; }
 
 		public DateTime End { get; protected set; }
@@ -13,12 +13,17 @@ namespace CalendarSync.Core.Domain
 		public bool IsPrivateItem { get; protected set; }
 		public string Location { get; protected set; }
 
+		#region IEquatable<CalendarItem> Members
+
 		public bool Equals(CalendarItem other)
 		{
 			if (ReferenceEquals(null, other)) return false;
 			if (ReferenceEquals(this, other)) return true;
-			return Equals(other.Title, Title) && other.Start.Equals(Start) && other.End.Equals(End) && other.IsPrivateItem.Equals(IsPrivateItem);
+			return Equals(other.Title, Title) && other.Start.Equals(Start) && other.End.Equals(End) &&
+			       other.IsPrivateItem.Equals(IsPrivateItem);
 		}
+
+		#endregion
 
 		public override bool Equals(object obj)
 		{

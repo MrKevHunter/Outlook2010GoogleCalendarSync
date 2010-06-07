@@ -1,30 +1,13 @@
+using System.Collections.Generic;
 using System.Linq;
 using CalendarSync.Core.Contracts;
+using CalendarSync.Core.Domain;
 using CalendarSync.Core.Properties;
 
 namespace CalendarSync.Core.Services
 {
 	public class CalendarSyncService : ICalendarSyncService
 	{
-
-		private int MonthsHistoryToSync
-		{
-			get
-			{
-				return Settings.Default.MonthsInThePast;
-			}
-		}
-
-
-		private int MonthsFutureToSync 
-		{
-			get
-			{
-				return Settings.Default.MonthsInTheFuture;
-			}
-		}
-
-
 		private readonly ICalendarService _googleCalendarService;
 		private readonly ICalendarService _outlookCalendarService;
 
@@ -34,14 +17,34 @@ namespace CalendarSync.Core.Services
 			_outlookCalendarService = outlookCalendarService;
 		}
 
+		private int MonthsHistoryToSync
+		{
+			get { return Settings.Default.MonthsInThePast; }
+		}
+
+
+		private int MonthsFutureToSync
+		{
+			get { return Settings.Default.MonthsInTheFuture; }
+		}
+
+		#region ICalendarSyncService Members
+
 		public void Sync()
 		{
-			var googleItems = _googleCalendarService.GetItems(MonthsHistoryToSync, MonthsFutureToSync);
-			var outlookItems = _outlookCalendarService.GetItems(MonthsHistoryToSync, MonthsFutureToSync);
-			var itemsMissingInOutlook = googleItems.Except(outlookItems);
-			var itemsMissingInGoogle = outlookItems.Except(googleItems);
+			IEnumerable<CalendarItem> itemsMissingInOutlook = GetMissingAppointments(sourceCalendar:_googleCalendarService,destinationCalendar:_outlookCalendarService);
+
+			IEnumerable<CalendarItem> itemsMissingInGoogle = GetMissingAppointments(sourceCalendar: _outlookCalendarService,destinationCalendar: _googleCalendarService);
+
 			_outlookCalendarService.AddItems(itemsMissingInOutlook);
 			_googleCalendarService.AddItems(itemsMissingInGoogle);
 		}
+
+		private IEnumerable<CalendarItem> GetMissingAppointments(ICalendarService sourceCalendar, ICalendarService destinationCalendar)
+		{
+			return sourceCalendar.GetItems().Except(destinationCalendar.GetItems());
+		}
+
+		#endregion
 	}
 }
