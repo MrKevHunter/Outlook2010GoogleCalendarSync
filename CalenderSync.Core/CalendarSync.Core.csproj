@@ -76,6 +76,7 @@
     <Compile Include="Domain\GoogleCalenderItem.cs" />
     <Compile Include="Domain\OutlookCalenderItem.cs" />
     <Compile Include="Domain\SyncConfiguration.cs" />
+    <Compile Include="IocConfig\CalendarServiceRegistry.cs" />
     <Compile Include="IocConfig\StructureMapConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\CalenderItem.cs" />
@@ -86,6 +87,7 @@
     </Compile>
     <Compile Include="Services\CalenderSyncronisationService.cs" />
     <Compile Include="Services\EncryptionService.cs" />
+    <Compile Include="Services\GoogleCalendarProxiedService.cs" />
     <Compile Include="Services\GoogleCalenderService.cs" />
     <Compile Include="Services\OutlookCalenderService.cs" />
     <Compile Include="Settings.cs" />

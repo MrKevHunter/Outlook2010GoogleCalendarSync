@@ -82,5 +82,17 @@ namespace CalendarSync.Core.Properties {
                 this["SyncIntervalMinutes"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseProxyServer {
+            get {
+                return ((bool)(this["UseProxyServer"]));
+            }
+            set {
+                this["UseProxyServer"] = value;
+            }
+        }
     }
 }

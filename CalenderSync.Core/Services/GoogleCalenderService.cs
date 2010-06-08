@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using CalendarSync.Core.Contracts;
 using CalendarSync.Core.Domain;
 using CalendarSync.Core.Properties;
@@ -13,31 +12,49 @@ namespace CalendarSync.Core.Services
 {
 	public class GoogleCalendarService : ICalendarService
 	{
-		private readonly int _monthsPast;
+		protected const string GOOGLE_CALENDAR_URI = "http://www.google.com/calendar/feeds/default/private/full";
 		private readonly int _monthsFuture;
-		private const string GOOGLE_CALENDAR_URI = "http://www.google.com/calendar/feeds/default/private/full";
+		private readonly int _monthsPast;
+		private CalendarService _calendarService;
 
-		public GoogleCalendarService(int monthsPast,int monthsFuture)
+
+		public GoogleCalendarService(int monthsPast, int monthsFuture)
 		{
 			_monthsPast = monthsPast;
 			_monthsFuture = monthsFuture;
+		}
+
+		protected virtual CalendarService Service
+		{
+			get
+			{
+				if (_calendarService == null)
+				{
+					_calendarService = new CalendarService("CalendarSyncApp")
+					                   	{
+					                   		Credentials =
+					                   			new GDataCredentials(Settings.Default.GoogleUsername,
+					                   			                     EncryptionService.ToInsecureString(
+					                   			                     	EncryptionService.DecryptString(Settings.Default.GooglePassword)))
+					                   	};
+				}
+
+				return _calendarService;
+			}
 		}
 
 		#region ICalendarService Members
 
 		public IEnumerable<CalendarItem> GetItems()
 		{
-			CalendarService service = GetService();
-
 			var query = new EventQuery
 			            	{
 			            		Uri = new Uri(GOOGLE_CALENDAR_URI),
-									StartTime = DateTime.Now.AddMonths(_monthsPast * -1),
-									EndTime = DateTime.Now.AddMonths(_monthsFuture)
+			            		StartTime = DateTime.Now.AddMonths(_monthsPast*-1),
+			            		EndTime = DateTime.Now.AddMonths(_monthsFuture)
 			            	};
 
-			SetProxy(service);
-			EventFeed calFeed = service.Query(query);
+			EventFeed calFeed = Service.Query(query);
 
 			return calFeed.Entries.Select(item => new GoogleCalendarItem((EventEntry) item));
 		}
@@ -52,17 +69,6 @@ namespace CalendarSync.Core.Services
 
 		#endregion
 
-		private CalendarService GetService()
-		{
-			return new CalendarService("CalendarSyncApp")
-			       	{
-			       		Credentials =
-			       			new GDataCredentials(Settings.Default.GoogleUsername,
-			       			                     EncryptionService.ToInsecureString(
-			       			                     	EncryptionService.DecryptString(Settings.Default.GooglePassword)))
-			       	};
-		}
-
 		private void AddItem(CalendarItem calendarItem)
 		{
 			var entry = new EventEntry(calendarItem.Title);
@@ -70,23 +76,10 @@ namespace CalendarSync.Core.Services
 			var eventTime = new When(calendarItem.Start, calendarItem.End);
 			entry.Times.Add(eventTime);
 			entry.Locations.Add(w);
-			
-			CalendarService calendarService = GetService();
-			SetProxy(calendarService);
-			calendarService.Insert(new Uri(GOOGLE_CALENDAR_URI), entry);
-		}
 
-		private void SetProxy(CalendarService service)
-		{
-			var f = (GDataRequestFactory)service.RequestFactory;
-			IWebProxy iProxy = WebRequest.DefaultWebProxy;
-			var myProxy = new WebProxy(iProxy.GetProxy(new Uri(GOOGLE_CALENDAR_URI)))
-			{
-				Credentials = CredentialCache.DefaultCredentials,
-				UseDefaultCredentials = true
-			};
-			// potentially, setup credentials on the proxy here
-			f.Proxy = myProxy;
+			CalendarService calendarService = Service;
+
+			calendarService.Insert(new Uri(GOOGLE_CALENDAR_URI), entry);
 		}
 	}
 }
