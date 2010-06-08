@@ -23,7 +23,7 @@ namespace CalendarSync.Core.Services
 		public IEnumerable<CalendarItem> GetItems()
 		{
 			Func<AppointmentItem, bool> predicate = appItem =>
-																 appItem.Start > DateTime.Now.AddMonths(_monthsPast * -1) ||
+																 appItem.Start > DateTime.Now.AddMonths(_monthsPast * -1) &&
 																 appItem.End < DateTime.Now.AddMonths(_monthsFuture);
 
 			Func<AppointmentItem, OutlookCalendarItem> selector = appItem => new OutlookCalendarItem(appItem);

@@ -6,15 +6,19 @@ using System.Text;
 
 namespace CalendarSync.Core.Services
 {
+
+	/// <summary>
+	/// Shamelessly cribbed from http://weblogs.asp.net/jgalloway/archive/2008/04/13/encrypting-passwords-in-a-net-app-config-file.aspx
+	/// </summary>
 	public class EncryptionService
 	{
-		private static readonly byte[] entropy = Encoding.Unicode.GetBytes("Salt Is Not A Password");
+		private static readonly byte[] Entropy = Encoding.Unicode.GetBytes("Salt Is Not A Password");
 
 		public static string EncryptString(SecureString input)
 		{
 			byte[] encryptedData = ProtectedData.Protect(
 				Encoding.Unicode.GetBytes(ToInsecureString(input)),
-				entropy,
+				Entropy,
 				DataProtectionScope.CurrentUser);
 			return Convert.ToBase64String(encryptedData);
 		}
@@ -25,7 +29,7 @@ namespace CalendarSync.Core.Services
 			{
 				byte[] decryptedData = ProtectedData.Unprotect(
 					Convert.FromBase64String(encryptedData),
-					entropy,
+					Entropy,
 					DataProtectionScope.CurrentUser);
 				return ToSecureString(Encoding.Unicode.GetString(decryptedData));
 			}

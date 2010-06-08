@@ -1,5 +1,4 @@
 using System;
-using System.Configuration;
 using CalendarSync.Core.Contracts;
 using CalendarSync.Core.Properties;
 using CalendarSync.Core.Services;
@@ -8,19 +7,17 @@ namespace CalendarSync.Core.Domain
 {
 	public class SyncConfiguration : ISyncConfiguration
 	{
+		#region ISyncConfiguration Members
+
 		public bool HasDefaultSettings
 		{
-			get
-			{
-				return Settings.Default.GoogleUsername == "Username";
-			}
-			
+			get { return Settings.Default.GoogleUsername == "Username"; }
 		}
 
 		public void UpdateSettings(Func<ISettings> getSettings)
 		{
 			ISettings values = getSettings();
-			if (values==null)
+			if (values == null)
 			{
 				return;
 			}
@@ -30,5 +27,7 @@ namespace CalendarSync.Core.Domain
 			Settings.Default.MonthsInThePast = values.MonthsInPast;
 			Settings.Default.Save();
 		}
+
+		#endregion
 	}
 }
