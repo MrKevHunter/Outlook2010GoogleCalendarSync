@@ -6,5 +6,6 @@ namespace CalendarSync.Core.Contracts
 		string Password { get;}
 		int MonthsInFuture { get;}
 		int MonthsInPast { get;}
+		bool UseProxy { get;}
 	}
 }

@@ -25,6 +25,7 @@ namespace CalendarSync.Core.Domain
 			Settings.Default.GooglePassword = EncryptionService.EncryptString(EncryptionService.ToSecureString(values.Password));
 			Settings.Default.MonthsInTheFuture = values.MonthsInFuture;
 			Settings.Default.MonthsInThePast = values.MonthsInPast;
+			Settings.Default.UseProxyServer = values.UseProxy;
 			Settings.Default.Save();
 		}
 
