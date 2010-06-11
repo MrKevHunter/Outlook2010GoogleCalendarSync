@@ -76,7 +76,7 @@ namespace CalendarSync.Core.Services
 			var eventTime = new When(calendarItem.Start, calendarItem.End);
 			entry.Times.Add(eventTime);
 			entry.Locations.Add(w);
-
+			entry.EventVisibility = calendarItem.IsPrivateItem ? EventEntry.Visibility.CONFIDENTIAL : EventEntry.Visibility.PUBLIC;
 			CalendarService calendarService = Service;
 
 			calendarService.Insert(new Uri(GOOGLE_CALENDAR_URI), entry);
