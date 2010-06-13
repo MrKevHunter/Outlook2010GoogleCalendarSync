@@ -9,33 +9,37 @@ namespace CalendarSync.Core.Services
 {
 	public class OutlookCalendarService : ICalendarService
 	{
-		#region ICalendarService Members
-
-		private readonly int _monthsPast;
+		private readonly IAppointmentSyncEventAggregator _appointmentSyncEventAggregator;
 		private readonly int _monthsFuture;
+		private readonly int _monthsPast;
 
-		public OutlookCalendarService(int monthsPast, int monthsFuture)
+		public OutlookCalendarService(IAppointmentSyncEventAggregator appointmentSyncEventAggregator, int monthsPast,
+		                              int monthsFuture)
 		{
+			_appointmentSyncEventAggregator = appointmentSyncEventAggregator;
 			_monthsPast = monthsPast;
 			_monthsFuture = monthsFuture;
 		}
 
+		#region ICalendarService Members
+
 		public IEnumerable<CalendarItem> GetItems()
 		{
 			Func<AppointmentItem, bool> predicate = appItem =>
-																 appItem.Start > DateTime.Now.AddMonths(_monthsPast * -1) &&
-																 appItem.End < DateTime.Now.AddMonths(_monthsFuture);
+			                                        appItem.Start > DateTime.Now.AddMonths(_monthsPast*-1) &&
+			                                        appItem.End < DateTime.Now.AddMonths(_monthsFuture);
 
 			Func<AppointmentItem, OutlookCalendarItem> selector = appItem => new OutlookCalendarItem(appItem);
 
-			return GetCalendarFolder().Items.Cast<AppointmentItem>().Where(predicate).Select(selector);
+			return GetCalendarFolder().Items.Cast<AppointmentItem>().Where(predicate).Select(selector).OrderBy(item => item.Start);
 		}
 
 		public void AddItems(IEnumerable<CalendarItem> itemsToAdd)
 		{
-			foreach (var item in itemsToAdd)
+			foreach (CalendarItem item in itemsToAdd)
 			{
 				AddItem(item);
+				_appointmentSyncEventAggregator.InvokeAppointmentSync(new AppointmentSyncEventArgs(item));
 			}
 		}
 

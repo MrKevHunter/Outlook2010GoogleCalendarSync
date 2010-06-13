@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using CalendarSync.Core.Contracts;
 using Google.GData.Calendar;
 using Google.GData.Client;
 
@@ -7,7 +8,8 @@ namespace CalendarSync.Core.Services
 {
 	public class GoogleCalendarProxiedService : GoogleCalendarService
 	{
-		public GoogleCalendarProxiedService(int monthsPast, int monthsFuture) : base(monthsPast, monthsFuture)
+		public GoogleCalendarProxiedService(IAppointmentSyncEventAggregator appointmentSyncEventAggregator, int monthsPast, int monthsFuture)
+			: base(appointmentSyncEventAggregator,monthsPast, monthsFuture)
 		{
 		}
 

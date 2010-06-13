@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using CalendarSync.Core.Contracts;
 using CalendarSync.Core.Domain;
 using CalendarSync.Core.Services;
 using Machine.Specifications;
+using Rhino.Mocks;
 
 namespace GoogleCalendarSyncOutlookAddIn.Tests
 {
@@ -10,7 +12,7 @@ namespace GoogleCalendarSyncOutlookAddIn.Tests
 	public class with_outlook_calendar_service
 	{
 		protected static OutlookCalendarService _sut;
-		private Establish context = () => { _sut = new OutlookCalendarService(1,3); };
+		private Establish context = () => { _sut = new OutlookCalendarService(MockRepository.GenerateMock<IAppointmentSyncEventAggregator>(), 1,3); };
 	}
 
 	[Subject(typeof (OutlookCalendarService))]
@@ -27,7 +29,7 @@ namespace GoogleCalendarSyncOutlookAddIn.Tests
 	public class with_google_calendar_service
 	{
 		protected static GoogleCalendarService _sut;
-		private Establish context = () => { _sut = new GoogleCalendarService(1,3); };
+		private Establish context = () => { _sut = new GoogleCalendarService(MockRepository.GenerateMock<IAppointmentSyncEventAggregator>(),1,3); };
 	}
 
 	[Subject(typeof (GoogleCalendarService))]

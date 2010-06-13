@@ -9,7 +9,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>
-        <Slider Grid.Column="0"  Minimum="1" Maximum="12" Value="1" IsSnapToTickEnabled="True"  TickFrequency="1" x:Name="sld" SmallChange="1" LargeChange="3" />
+        <Slider Grid.Column="0"  Minimum="0" Maximum="12" Value="1" IsSnapToTickEnabled="True"  TickFrequency="1" x:Name="sld" SmallChange="1" LargeChange="3" />
         <TextBox Grid.Column="1" Text="{Binding Path=Value, ElementName=sld}" ></TextBox>
 
     </Grid>

@@ -54,5 +54,10 @@ namespace CalendarSync.Core.Domain
 		{
 			return !Equals(left, right);
 		}
+
+		public override string ToString()
+		{
+			return this.Title;
+		}
 	}
 }

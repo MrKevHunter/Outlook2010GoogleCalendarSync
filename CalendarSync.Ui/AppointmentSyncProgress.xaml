@@ -1,0 +1,8 @@
+﻿<Window x:Class="CalendarSync.Ui.AppointmentSyncProgress"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Appointment Sync Progress" Height="300" Width="300">
+    <Grid>
+        <ListView Height="237" HorizontalAlignment="Left" Margin="12,12,0,0" Name="lvwItems" VerticalAlignment="Top" Width="139" />
+    </Grid>
+</Window>

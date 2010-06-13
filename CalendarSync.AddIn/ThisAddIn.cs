@@ -23,6 +23,12 @@ namespace CalendarSync.AddIn
 			get { return StructureMapConfig.Container.GetInstance<ISyncConfiguration>(); }
 		}
 
+		private IAppointmentSyncEventAggregator AppointmentSyncEventAggregator
+		{
+			get { return StructureMapConfig.Container.GetInstance<IAppointmentSyncEventAggregator>();}
+
+		}
+
 		private void ThisAddIn_Startup(object sender, EventArgs e)
 		{
 
@@ -30,8 +36,10 @@ namespace CalendarSync.AddIn
 			{
 				SyncConfiguration.UpdateSettings(GetSettings);
 			}
-
+			AppointmentSyncProgress window = new AppointmentSyncProgress(AppointmentSyncEventAggregator);
+			window.Show();
 			CalendarSyncService.Sync();
+//			window.Close();
 		}
 
 		public static ISettings GetSettings()

@@ -28,6 +28,7 @@ namespace CalendarSync.Core.IocConfig
 			                           		       		y.Assembly("CalendarSync.Core");
 			                           		       		y.WithDefaultConventions();
 			                           		       		y.LookForRegistries();
+
 			                           		       	});
 														x.AddRegistry<CalendarServiceRegistry>();
 

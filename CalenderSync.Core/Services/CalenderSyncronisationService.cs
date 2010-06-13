@@ -20,9 +20,9 @@ namespace CalendarSync.Core.Services
 
 		public void Sync()
 		{
-			IEnumerable<CalendarItem> itemsMissingInOutlook = GetMissingAppointments(sourceCalendar:_googleCalendarService,destinationCalendar:_outlookCalendarService);
+			var itemsMissingInOutlook = GetMissingAppointments(sourceCalendar:_googleCalendarService,destinationCalendar:_outlookCalendarService).ToList();
 
-			IEnumerable<CalendarItem> itemsMissingInGoogle = GetMissingAppointments(sourceCalendar: _outlookCalendarService,destinationCalendar: _googleCalendarService);
+			var itemsMissingInGoogle = GetMissingAppointments(sourceCalendar: _outlookCalendarService,destinationCalendar: _googleCalendarService).ToList();
 
 			_outlookCalendarService.AddItems(itemsMissingInOutlook);
 			_googleCalendarService.AddItems(itemsMissingInGoogle);
