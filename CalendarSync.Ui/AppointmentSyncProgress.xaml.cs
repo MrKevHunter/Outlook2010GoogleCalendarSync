@@ -31,7 +31,7 @@ namespace CalendarSync.Ui
 
 		private void AppointmentSyncEventAggregatorAppointmentSync(object sender, AppointmentSyncEventArgs e)
 		{
-			lvwItems.Items.Add(e.Item);
+			dataGrid1.Items.Add(e.Item);
 		}
 	}
 }

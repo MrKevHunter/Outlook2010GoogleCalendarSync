@@ -63,7 +63,7 @@ namespace CalendarSync.Core.Services
 			foreach (CalendarItem calendarItem in itemsToAdd)
 			{
 				AddItem(calendarItem);
-				_appointmentSyncEventAggregator.InvokeAppointmentSync(new AppointmentSyncEventArgs(calendarItem));
+				_appointmentSyncEventAggregator.InvokeAppointmentSync(new AppointmentSyncEventArgs(calendarItem,CalendarType.Google));
 			}
 		}
 

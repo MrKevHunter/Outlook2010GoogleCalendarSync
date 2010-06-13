@@ -39,7 +39,7 @@ namespace CalendarSync.Core.Services
 			foreach (CalendarItem item in itemsToAdd)
 			{
 				AddItem(item);
-				_appointmentSyncEventAggregator.InvokeAppointmentSync(new AppointmentSyncEventArgs(item));
+				_appointmentSyncEventAggregator.InvokeAppointmentSync(new AppointmentSyncEventArgs(item,CalendarType.Outlook));
 			}
 		}
 

@@ -88,6 +88,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Services\AppointmentSyncEventAggregator.cs" />
+    <Compile Include="Services\AppointmentSyncEventArgs.cs" />
+    <Compile Include="Services\CalendarType.cs" />
     <Compile Include="Services\CalenderSyncronisationService.cs" />
     <Compile Include="Services\EncryptionService.cs" />
     <Compile Include="Services\GoogleCalendarProxiedService.cs" />
