@@ -3,6 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Appointment Sync Progress" Height="323" Width="473">
     <Grid>
-        <DataGrid AutoGenerateColumns="False" Height="260" HorizontalAlignment="Left" Margin="12,12,0,0" Name="dataGrid1" VerticalAlignment="Top" Width="427" />
+        <DataGrid AutoGenerateColumns="False" Name="dataGrid1"  />
     </Grid>
 </Window>

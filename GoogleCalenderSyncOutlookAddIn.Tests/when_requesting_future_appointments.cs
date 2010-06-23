@@ -12,7 +12,7 @@ namespace GoogleCalendarSyncOutlookAddIn.Tests
 	public class with_outlook_calendar_service
 	{
 		protected static OutlookCalendarService _sut;
-		private Establish context = () => { _sut = new OutlookCalendarService(MockRepository.GenerateMock<IAppointmentSyncEventAggregator>(), 1,3); };
+		private Establish context = () => { _sut = new OutlookCalendarService(MockRepository.GenerateMock<IAppointmentSyncEventAggregator>(), 0,1); };
 	}
 
 	[Subject(typeof (OutlookCalendarService))]
@@ -29,7 +29,7 @@ namespace GoogleCalendarSyncOutlookAddIn.Tests
 	public class with_google_calendar_service
 	{
 		protected static GoogleCalendarService _sut;
-		private Establish context = () => { _sut = new GoogleCalendarService(MockRepository.GenerateMock<IAppointmentSyncEventAggregator>(),1,3); };
+		private Establish context = () => { _sut = new GoogleCalendarService(MockRepository.GenerateMock<IAppointmentSyncEventAggregator>(),0,1); };
 	}
 
 	[Subject(typeof (GoogleCalendarService))]
